@@ -42,10 +42,15 @@
 
         pre.banner {
             color: #00ff41;
-            font-size: 14px;
-            line-height: 1.1;
+            font-size: 13px;
+            line-height: 1.15;
             text-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
             margin-bottom: 30px;
+            background: #000;
+            padding: 15px;
+            border: 1px solid #005511;
+            border-radius: 5px;
+            overflow-x: auto;
         }
 
         h1, h2 {
@@ -59,6 +64,7 @@
             padding: 20px;
             border-radius: 5px;
             box-shadow: 0 0 15px rgba(0, 255, 65, 0.2);
+            margin-bottom: 20px;
         }
 
         .btn {
@@ -69,6 +75,7 @@
             text-decoration: none;
             border: 1px solid #00ff41;
             margin-top: 10px;
+            margin-right: 10px;
             transition: all 0.3s;
             cursor: pointer;
         }
@@ -95,6 +102,18 @@
 
         @keyframes blinker {
             50% { opacity: 0; }
+        }
+
+        .badge {
+            display: inline-block;
+            background: #00ff41;
+            color: #000;
+            padding: 2px 8px;
+            border-radius: 3px;
+            font-size: 0.8em;
+            font-weight: bold;
+            margin-left: 10px;
+            vertical-align: middle;
         }
     </style>
 </head>
@@ -123,15 +142,21 @@
             <li>8 инструментов в одном окне</li>
         </ul>
 
-        <h2>Установка и запуск</h2>
+        <h2>Скачать</h2>
         <div class="terminal-box">
-            <p><span style="color:#888;"># Скачать репозиторий</span><br>
-            <code>git clone https://github.com/yourname/cactustui.git</code></p>
+            <p><strong>Готовый .exe:</strong> <span class="badge">Windows</span></p>
+            <p>Скачай последнюю версию программы прямо из репозитория (нажми на кнопку, чтобы скачать файл).</p>
+            <!-- ИСПРАВЛЕННАЯ ССЫЛКА (raw вместо blob) -->
+            <a href="https://github.com/cactuspopov/CactusTUI/raw/main/CactusTUI.exe" class="btn" target="_blank">Скачать CactusTUI.exe</a>
+            <a href="https://github.com/cactuspopov/CactusTUI" class="btn" target="_blank">GitHub</a>
+        </div>
+
+        <h2>Установка из исходников</h2>
+        <div class="terminal-box">
+            <p><span style="color:#888;"># Клонировать репозиторий</span><br>
+            <code>git clone https://github.com/cactuspopov/CactusTUI.git</code></p>
             <p><span style="color:#888;"># Запустить</span><br>
-            <code>cd cactustui && python main.py</code></p>
-            
-            <a href="#" class="btn">Скачать .exe</a>
-            <a href="#" class="btn">GitHub</a>
+            <code>cd CactusTUI && python main.py</code></p>
         </div>
     </div>
 </body>
