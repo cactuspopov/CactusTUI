@@ -52,7 +52,7 @@
 
         pre.banner {
             color: var(--primary);
-            font-size: 10px; /* Уменьшен для вместимости широкого логотипа */
+            font-size: 10px;
             line-height: 1.1;
             text-shadow: 0 0 10px rgba(176, 38, 255, 0.5);
             margin-bottom: 10px;
@@ -155,11 +155,8 @@
             font-size: 0.9em;
         }
 
-        /* Адаптивность для мобильных */
         @media (max-width: 768px) {
-            pre.banner {
-                font-size: 6px;
-            }
+            pre.banner { font-size: 6px; }
             .btn {
                 display: block;
                 text-align: center;
@@ -198,18 +195,17 @@
         <div class="terminal-box">
             <p><strong>Готовый билд:</strong> <span class="badge">Windows .exe</span></p>
             <p>Скачай последнюю скомпилированную версию программы. Просто запусти файл, ничего устанавливать не нужно.</p>
-            <!-- ЗАМЕНИ 'yourusername' на свой никнейм на GitHub -->
-            <a href="https://github.com/yourusername/CACTUSTOOLS/releases/latest/download/CACTUSTOOLS.exe" class="btn" target="_blank">Скачать CACTUSTOOLS.exe</a>
-            <a href="https://github.com/yourusername/CACTUSTOOLS" class="btn" target="_blank">GitHub Репозиторий</a>
+            <a href="https://github.com/cactuspopov/CactusTUI/raw/main/CACTUSTOOLS.exe" class="btn" target="_blank">Скачать CACTUSTOOLS.exe</a>
+            <a href="https://github.com/cactuspopov/CactusTUI" class="btn" target="_blank">GitHub Репозиторий</a>
         </div>
 
         <h2>Установка из исходников</h2>
         <div class="terminal-box">
             <p><span style="color: var(--text-dim);"># 1. Клонировать репозиторий</span><br>
-            <code>git clone https://github.com/yourusername/CACTUSTOOLS.git</code></p>
+            <code>git clone https://github.com/cactuspopov/CactusTUI.git</code></p>
             
             <p><span style="color: var(--text-dim);"># 2. Перейти в папку</span><br>
-            <code>cd CACTUSTOOLS</code></p>
+            <code>cd CactusTUI</code></p>
             
             <p><span style="color: var(--text-dim);"># 3. Установить зависимости</span><br>
             <code>pip install colorama</code></p>
@@ -222,7 +218,7 @@
         <div class="terminal-box">
             <p>Хочешь собрать приложение сам? Используй PyInstaller:</p>
             <code>pip install pyinstaller</code><br><br>
-            <code>pyinstaller --onefile --name CACTUSTOOLS --hidden-import=colorama main.py</code>
+            <code>python -m PyInstaller --onefile --name CACTUSTOOLS --hidden-import=colorama main.py</code>
             <p style="margin-top: 15px; font-size: 0.9em; color: var(--text-dim);">
                 Готовый файл появится в папке <code>dist/</code>.
             </p>
