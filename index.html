@@ -3,13 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CACTUSTUI — Terminal Multipurpose</title>
+    <title>CACTUSTOOLS — Terminal Multipurpose Framework</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&display=swap');
 
+        :root {
+            --primary: #b026ff;
+            --primary-dim: #6a0dad;
+            --primary-dark: #2d0a4e;
+            --bg: #05000a;
+            --text: #e0b0ff;
+            --text-dim: #888;
+        }
+
         body {
-            background-color: #0a0a0a;
-            color: #00ff41;
+            background-color: var(--bg);
+            color: var(--text);
             font-family: 'Fira Code', monospace;
             margin: 0;
             padding: 0;
@@ -17,7 +26,7 @@
             overflow-x: hidden;
         }
 
-        /* Эффект ЭЛТ-монитора */
+        /* Эффект ЭЛТ-монитора (фиолетовый тинт) */
         body::after {
             content: " ";
             display: block;
@@ -26,14 +35,15 @@
             left: 0;
             bottom: 0;
             right: 0;
-            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), 
+                        linear-gradient(90deg, rgba(176, 38, 255, 0.06), rgba(106, 13, 173, 0.02), rgba(176, 38, 255, 0.06));
             z-index: 2;
             background-size: 100% 2px, 3px 100%;
             pointer-events: none;
         }
 
         .container {
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
             padding: 40px 20px;
             position: relative;
@@ -41,49 +51,64 @@
         }
 
         pre.banner {
-            color: #00ff41;
-            font-size: 13px;
-            line-height: 1.15;
-            text-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
-            margin-bottom: 30px;
+            color: var(--primary);
+            font-size: 10px; /* Уменьшен для вместимости широкого логотипа */
+            line-height: 1.1;
+            text-shadow: 0 0 10px rgba(176, 38, 255, 0.5);
+            margin-bottom: 10px;
             background: #000;
             padding: 15px;
-            border: 1px solid #005511;
+            border: 1px solid var(--primary-dim);
             border-radius: 5px;
             overflow-x: auto;
+            font-weight: bold;
+        }
+
+        .subtitle {
+            color: var(--text-dim);
+            font-size: 14px;
+            text-align: center;
+            margin-bottom: 40px;
+            letter-spacing: 2px;
         }
 
         h1, h2 {
-            color: #00ff41;
-            text-shadow: 0 0 8px rgba(0, 255, 65, 0.5);
+            color: var(--primary);
+            text-shadow: 0 0 8px rgba(176, 38, 255, 0.5);
+            border-bottom: 1px dashed var(--primary-dim);
+            padding-bottom: 10px;
         }
 
         .terminal-box {
-            border: 1px solid #005511;
-            background: #000;
+            border: 1px solid var(--primary-dim);
+            background: rgba(10, 0, 20, 0.8);
             padding: 20px;
             border-radius: 5px;
-            box-shadow: 0 0 15px rgba(0, 255, 65, 0.2);
+            box-shadow: 0 0 15px rgba(106, 13, 173, 0.2);
             margin-bottom: 20px;
         }
 
         .btn {
             display: inline-block;
-            background: #005511;
-            color: #00ff41;
-            padding: 10px 20px;
+            background: var(--primary-dark);
+            color: var(--primary);
+            padding: 12px 24px;
             text-decoration: none;
-            border: 1px solid #00ff41;
+            border: 1px solid var(--primary);
             margin-top: 10px;
             margin-right: 10px;
             transition: all 0.3s;
             cursor: pointer;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 14px;
         }
 
         .btn:hover {
-            background: #00ff41;
+            background: var(--primary);
             color: #000;
-            box-shadow: 0 0 20px #00ff41;
+            box-shadow: 0 0 25px var(--primary);
+            transform: translateY(-2px);
         }
 
         ul {
@@ -91,9 +116,14 @@
             padding-left: 0;
         }
 
+        li {
+            margin-bottom: 8px;
+        }
+
         li::before {
             content: "> ";
-            color: #00aa2a;
+            color: var(--primary);
+            font-weight: bold;
         }
 
         .blink {
@@ -106,57 +136,96 @@
 
         .badge {
             display: inline-block;
-            background: #00ff41;
+            background: var(--primary);
             color: #000;
-            padding: 2px 8px;
+            padding: 3px 10px;
             border-radius: 3px;
-            font-size: 0.8em;
+            font-size: 0.75em;
             font-weight: bold;
             margin-left: 10px;
             vertical-align: middle;
+            box-shadow: 0 0 10px rgba(176, 38, 255, 0.4);
+        }
+
+        code {
+            background: #1a052b;
+            color: var(--primary);
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 0.9em;
+        }
+
+        /* Адаптивность для мобильных */
+        @media (max-width: 768px) {
+            pre.banner {
+                font-size: 6px;
+            }
+            .btn {
+                display: block;
+                text-align: center;
+                margin-right: 0;
+                margin-bottom: 10px;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
         <pre class="banner">
- ####   ##    ####  ###### #   #  ####  ###### #   #  #####
-#      #  #  #         #   #   # #         #   #   #    #  
-#      #  #  #         #   #   # #         #   #   #    #  
-#      ####  #         #   #   #  ####     #   #   #    #  
-#      #  #  #         #   #   #      #    #   #   #    #  
-#      #  #  #         #   #   #      #    #   #   #    #  
- ####  #  #   ####     #    ###    ####     #    ###   ### 
+ ██████╗ ██████╗ ██████╗ ███████╗    ██████╗ ██████╗ ███████╗ █████╗  ██████╗██╗  ██╗
+██╔════╝██╔═══██╗██╔══██╗██╔════╝    ██╔══██╗██╔══██╗██╔════╝██╔══██╗██╔════╝██║  ██║
+██║     ██║   ██║██████╔╝█████╗      ██████╔╝██████╔╝█████╗  ███████║██║     ███████║
+██║     ██║   ██║██╔══██╗██╔══╝      ██╔═══╝ ██╔══██╗██╔══╝  ██╔══██║██║     ██╔══██║
+╚██████╗╚██████╔╝██║  ██║███████╗    ██║     ██║  ██║███████╗██║  ██║╚██████╗██║  ██║
+ ╚═════╝ ╚═════╝ ╚═╝  ╚═╝╚══════╝    ╚═╝     ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝
         </pre>
 
-        <p class="blink">_</p>
+        <p class="subtitle">BEST & PRETTIEST FRAMEWORK — EDITION 2026 <span class="blink">_</span></p>
 
         <h2>О проекте</h2>
-        <p>CACTUSTUI — это мощный консольный комбайн, написанный на Python. Он объединяет в себе генератор паролей, хеширование, конвертацию Base64, работу с UUID, системную информацию и даже бросок кубиков D&D.</p>
+        <p><strong>CACTUSTOOLS</strong> — это мощный консольный фреймворк, написанный на Python. Он объединяет в себе 18 утилит для работы с сетью, криптографией, системной информацией и генерацией данных. Всё это упаковано в стильный терминальный интерфейс с матричной загрузкой и фиолетовым градиентом.</p>
 
         <h2>Возможности</h2>
         <ul>
-            <li>5 цветовых тем (включая культовую Cactus)</li>
-            <li>Плавная анимация интерфейса</li>
-            <li>Сохранение профиля в конфиг</li>
-            <li>8 инструментов в одном окне</li>
+            <li>18 инструментов в одном окне (пароли, хеши, UUID, Base64, сеть, шифры)</li>
+            <li>Матричная загрузка с глитч-эффектом и прогресс-барами</li>
+            <li>Градиентный ASCII-логотип с TrueColor поддержкой</li>
+            <li>Кроссплатформенность (Windows, Linux, macOS)</li>
+            <li>Компактный .exe файл, не требующий установленного Python</li>
         </ul>
 
         <h2>Скачать</h2>
         <div class="terminal-box">
-            <p><strong>Готовый .exe:</strong> <span class="badge">Windows</span></p>
-            <p>Скачай последнюю версию программы прямо из репозитория (нажми на кнопку, чтобы скачать файл).</p>
-            <!-- ИСПРАВЛЕННАЯ ССЫЛКА (raw вместо blob) -->
-            <a href="https://github.com/cactuspopov/CactusTUI/raw/main/CactusTUI.exe" class="btn" target="_blank">Скачать CactusTUI.exe</a>
-            <a href="https://github.com/cactuspopov/CactusTUI" class="btn" target="_blank">GitHub</a>
+            <p><strong>Готовый билд:</strong> <span class="badge">Windows .exe</span></p>
+            <p>Скачай последнюю скомпилированную версию программы. Просто запусти файл, ничего устанавливать не нужно.</p>
+            <!-- ЗАМЕНИ 'yourusername' на свой никнейм на GitHub -->
+            <a href="https://github.com/yourusername/CACTUSTOOLS/releases/latest/download/CACTUSTOOLS.exe" class="btn" target="_blank">Скачать CACTUSTOOLS.exe</a>
+            <a href="https://github.com/yourusername/CACTUSTOOLS" class="btn" target="_blank">GitHub Репозиторий</a>
         </div>
 
         <h2>Установка из исходников</h2>
         <div class="terminal-box">
-            <p><span style="color:#888;"># Клонировать репозиторий</span><br>
-            <code>git clone https://github.com/cactuspopov/CactusTUI.git</code></p>
-            <p><span style="color:#888;"># Запустить</span><br>
-            <code>cd CactusTUI && python main.py</code></p>
+            <p><span style="color: var(--text-dim);"># 1. Клонировать репозиторий</span><br>
+            <code>git clone https://github.com/yourusername/CACTUSTOOLS.git</code></p>
+            
+            <p><span style="color: var(--text-dim);"># 2. Перейти в папку</span><br>
+            <code>cd CACTUSTOOLS</code></p>
+            
+            <p><span style="color: var(--text-dim);"># 3. Установить зависимости</span><br>
+            <code>pip install colorama</code></p>
+            
+            <p><span style="color: var(--text-dim);"># 4. Запустить</span><br>
+            <code>python main.py</code></p>
+        </div>
+
+        <h2>Сборка своего .exe</h2>
+        <div class="terminal-box">
+            <p>Хочешь собрать приложение сам? Используй PyInstaller:</p>
+            <code>pip install pyinstaller</code><br><br>
+            <code>pyinstaller --onefile --name CACTUSTOOLS --hidden-import=colorama main.py</code>
+            <p style="margin-top: 15px; font-size: 0.9em; color: var(--text-dim);">
+                Готовый файл появится в папке <code>dist/</code>.
+            </p>
         </div>
     </div>
 </body>
